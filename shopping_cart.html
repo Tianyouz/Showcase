@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+<link rel="stylesheet" href="detailstyle.css">
+</head>
+<body>
+
+<h1><img src="Heading.JPG" width="1500"></h1>
+
+
+<div class="navbar">
+  <a href="index.html" class="active">Home</a>
+  <a href="#">About</a>
+  <a href="product_browsing.html">Products</a>
+  <a href="#">  <form><input type="text" id="search" name="search" style="height:14px; width:80px">     Search</form> </a>
+  <a href="#">Cart</a>
+  <a href="#">Log In</a>
+</div>
+<br>
+  <div class="row">
+  
+    <div class="column left">
+    	<img src="pillow3.JPG" height="100px" width="200px">
+    </div>
+    <div class="column middle">
+    	<p style="color : black">Bed Pillows</p>
+    </div>
+    <div class="column right">
+        <button type="button" onclick="myFunction()">Delete!</button>
+    </div>
+  
+    
+    
+    <script>
+    function myFunction() {
+      var x = document.getElementsByClassName("row");
+      x[0].innerHTML = "";
+    }
+    </script>
+    
+  </div>
+
+
+
+
+
+  <div class="row" id="row2">
+  
+    <div class="column left" >
+    	<img src="pillow2.JPG" height="100px" width="200px">
+    </div>
+    <div class="column middle">
+    	<p style="color : black">Couch Pillows</p>
+    </div>
+    <div class="column right">
+        <button type="button" onclick="myFunction2()">Delete!</button>
+    </div>
+  
+    
+    
+    <script>
+    function myFunction2() {
+  		document.getElementById("row2").innerHTML = "";
+	}
+    </script>
+    
+  </div>
+
+
+
+</body>
+</html>

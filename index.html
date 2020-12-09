@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+<link rel="stylesheet" href="homestyle.css">
+<style>* { padding: 0; margin: 0; }</style>
+</head>
+<body>
+
+<h1 style="background-color:#B69975;color:black;padding:30px;font-family:'Courier New">Dear Diary</h1>
+
+<div class="navbar">
+  <a href="index.html" class="active">Home</a>
+  <a href="#">About</a>
+  <a href="product_browsing.html">Directory</a>
+  <a style="float:right" href="#">Log In</a>
+  <a style="float:right" href="#">  <form><input type="text" id="search" name="search" style="height:14px; width:80px">     Search</form> </a>
+</div>
+
+<br><br><br>
+
+
+<p id="demo" onclick="myFunction()" style="color:black">Next</p>
+
+<script>
+function myFunction() {
+  document.getElementById("demo").innerHTML = "Supposing showing next page";
+}
+
+</script>
+
+
+<div class="row" style="border-style: solid; border-color: #633700; margin-left: 500px; margin-right: 500px; padding: 100px; height: 300px">
+   
+   <form onsubmit="newFunction();">
+  		<textarea id="fentry" name="fname" style="height:300px; width:300px"></textarea><br>
+ 		<input type="submit" value="Modify">
+   </form> 
+	<script>
+	
+        document.getElementById("fentry").value = localStorage.getItem("sample_text");
+        function newFunction() {
+	
+  	localStorage.setItem("sample_text", document.getElementById("fentry").value);
+	}
+	</script>
+</div>
+
+
+</body>
+</html>
