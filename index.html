@@ -19,47 +19,73 @@
 
 <br><br><br>
 
-
-<p id="demo" onclick="myFunction()" style="color:black">Next</p>
-
-<script>
-function myFunction() {
-  document.getElementById("demo").innerHTML = "Supposing showing next page";
-}
-
-</script>
-
-
 <!-- <div class="row" style="border-style: solid; border-color: #633700; margin-left: 500px; margin-right: 500px; padding: 100px; height: 300px"> -->
-   <button onclick="next()">Next</button>
-   <p id="test">1</p>
-   <form onsubmit="modifyEntry();">
+   <button type="button" onclick="return prev()" style="background-color: #633700; color: white; padding: 14px 16px; font-size: 17px">Prev</button>
+   <button type="button" onclick="return next()" style="background-color: #633700; color: white; padding: 14px 16px; font-size: 17px">Next</button>
+   <button type="button" onclick="return init()">Init</button>
+   <p id="Promptt" style="background-color: #633700; color: white; padding: 14px 16px; width:300px; font-size: 17px">1</p>
+   <form>
   		<textarea id="fentry" name="fname" style="height:450px; width:500px; background-color: rgb(243, 232, 218); font-family:'Courier New'; font-size:18px"></textarea><br>
- 		<input type="submit" value="Modify">
+ 		<input type="button" onclick="return modifyEntry();" value="Modify" style="background-color: #633700; color: white; padding: 14px 16px; font-size: 17px">
    </form> 
 
-   <form onsubmit="newEntry();">
+   <form>
   		<textarea id="newEntry" name="newEntryName" style="height:450px; width:500px; background-color: rgb(243, 232, 218); font-family:'Courier New'; font-size:18px"></textarea><br>
- 		<input type="submit" value="Modify">
+ 		<input type="button" onclick="return newEntryFun();" value="Add" style="background-color: #633700; color: white; padding: 14px 16px; font-size: 17px">
    </form> 
    <script>
 	
-        document.getElementById("fentry").value = localStorage.getItem("sample_text");
-	localStorage.setItem("storedIdx", 0);
-	document.getElementById("test").innerHTML = "Showing entry No. " + localStorage.getItem("storedIdx");        
+        
 	
-	var list = ["Saab", "Volvo", "BMW"];
-	localStorage.setItem("storedList", JSON.stringfy(list));
-	function next(){
-		localStorage.setItem("storedIdx", JSON.stringify((parseInt(localStorage.getItem("storedIdx")) + 1) % 5));
-		document.getElementById("test").innerHTML = "Showing entry No. " + localStorage.getItem("storedIdx");
+	document.getElementById("Promptt").innerHTML = "Showing entry No. " + localStorage.getItem("storedIdx");        
+	
+	var list = JSON.parse(localStorage.storedList);
+	localStorage.setItem("storedList", JSON.stringify(list));
+        
+	
+	localStorage.setItem("totalLen", list.length);
+	document.getElementById("fentry").value =  (JSON.parse(localStorage.getItem("storedList")))[parseInt(localStorage.getItem("storedIdx"))];
+
+	function init(){
+		list = ["Saab", "Volvo", "BMW"];
+		localStorage.setItem("storedList", JSON.stringify(list));
+        
+	
+	localStorage.setItem("totalLen", list.length);
+	document.getElementById("fentry").value =  (JSON.parse(localStorage.getItem("storedList")))[parseInt(localStorage.getItem("storedIdx"))];
 	}
-	function newEntry() {
-		localStorage.setItem("storedList", JSON.stringfy( (JSON.parse(localStorage.getItem("storedList"))).push(document.getElementById("newEntry").value) ));
+
+	function prev(){
+		if (parseInt(localStorage.getItem("totalLen")) !== 0){
+		localStorage.setItem("storedIdx", JSON.stringify(  (parseInt(localStorage.getItem("storedIdx")) + (parseInt(localStorage.totalLen))- 1) % (parseInt(localStorage.totalLen)) ));
+		document.getElementById("test").innerHTML = "Showing entry No. " + localStorage.getItem("storedIdx");
+		document.getElementById("fentry").value =  (JSON.parse(localStorage.getItem("storedList")))[parseInt(localStorage.getItem("storedIdx"))];
+		}
+		
+	}
+	function next(){
+		
+		localStorage.setItem("storedIdx", JSON.stringify(  (parseInt(localStorage.getItem("storedIdx")) + 1) % (parseInt(localStorage.totalLen)) ));
+		document.getElementById("test").innerHTML = "Showing entry No. " + localStorage.getItem("storedIdx");
+		document.getElementById("fentry").value =  (JSON.parse(localStorage.getItem("storedList")))[parseInt(localStorage.getItem("storedIdx"))];
+	}
+	function newEntryFun(){
+		
+		localStorage.setItem("totalLen", parseInt(localStorage.totalLen) + 1);
+		
+		var temp = (JSON.parse(localStorage.getItem("storedList")));
+		temp.push(document.getElementById("newEntry").value);
+		
+		localStorage.setItem("storedList", JSON.stringify(temp));
+		localStorage.setItem("storedIdx", parseInt(localStorage.totalLen) - 1);
+		
+		document.getElementById("fentry").value =  (JSON.parse(localStorage.getItem("storedList")))[parseInt(localStorage.getItem("storedIdx"))];
+		document.getElementById("test").innerHTML = "Showing entry No. " + localStorage.getItem("storedIdx");
 		
 	}
 	function modifyEntry() { 
- 		localStorage.setItem("sample_text", document.getElementById("fentry").value);
+		
+ 		localStorage.setItem((JSON.parse(localStorage.getItem("storedList")))[parseInt(localStorage.getItem("storedIdx"))], document.getElementById("fentry").value);
 	}
    </script>
 <!-- </div> -->
