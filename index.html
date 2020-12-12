@@ -30,21 +30,30 @@ function myFunction() {
 </script>
 
 
-<div class="row" style="border-style: solid; border-color: #633700; margin-left: 500px; margin-right: 500px; padding: 100px; height: 300px">
-   
+<!-- <div class="row" style="border-style: solid; border-color: #633700; margin-left: 500px; margin-right: 500px; padding: 100px; height: 300px"> -->
+   <button onclick="next()">Next</button>
+   <p id="test">1</p>
    <form onsubmit="newFunction();">
-  		<textarea id="fentry" name="fname" style="height:300px; width:300px"></textarea><br>
+  		<textarea id="fentry" name="fname" style="height:450px; width:500px; background-color: rgb(243, 232, 218); font-family:'Courier New'; font-size:18px"></textarea><br>
  		<input type="submit" value="Modify">
    </form> 
-	<script>
+   <script>
 	
         document.getElementById("fentry").value = localStorage.getItem("sample_text");
-        function newFunction() {
+
 	
-  	localStorage.setItem("sample_text", document.getElementById("fentry").value);
+	document.getElementById("test").innerHTML = localStorage.getItem("storedIdx");        
+
+	function next(){
+		
+		localStorage.setItem("storedIdx", JSON.stringify((parseInt(localStorage.getItem("storedIdx")) + 1) % 5));
+		document.getElementById("test").innerHTML = localStorage.getItem("storedIdx");
 	}
-	</script>
-</div>
+	function newFunction() { 
+ 		localStorage.setItem("sample_text", document.getElementById("fentry").value);
+	}
+   </script>
+<!-- </div> -->
 
 
 </body>
