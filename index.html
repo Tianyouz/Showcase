@@ -33,23 +33,32 @@ function myFunction() {
 <!-- <div class="row" style="border-style: solid; border-color: #633700; margin-left: 500px; margin-right: 500px; padding: 100px; height: 300px"> -->
    <button onclick="next()">Next</button>
    <p id="test">1</p>
-   <form onsubmit="newFunction();">
+   <form onsubmit="modifyEntry();">
   		<textarea id="fentry" name="fname" style="height:450px; width:500px; background-color: rgb(243, 232, 218); font-family:'Courier New'; font-size:18px"></textarea><br>
+ 		<input type="submit" value="Modify">
+   </form> 
+
+   <form onsubmit="newEntry();">
+  		<textarea id="newEntry" name="newEntryName" style="height:450px; width:500px; background-color: rgb(243, 232, 218); font-family:'Courier New'; font-size:18px"></textarea><br>
  		<input type="submit" value="Modify">
    </form> 
    <script>
 	
         document.getElementById("fentry").value = localStorage.getItem("sample_text");
-
+	localStorage.setItem("storedIdx", 0);
+	document.getElementById("test").innerHTML = "Showing entry No. " + localStorage.getItem("storedIdx");        
 	
-	document.getElementById("test").innerHTML = localStorage.getItem("storedIdx");        
-
+	var list = ["Saab", "Volvo", "BMW"];
+	localStorage.setItem("storedList", JSON.stringfy(list));
 	function next(){
-		
 		localStorage.setItem("storedIdx", JSON.stringify((parseInt(localStorage.getItem("storedIdx")) + 1) % 5));
-		document.getElementById("test").innerHTML = localStorage.getItem("storedIdx");
+		document.getElementById("test").innerHTML = "Showing entry No. " + localStorage.getItem("storedIdx");
 	}
-	function newFunction() { 
+	function newEntry() {
+		localStorage.setItem("storedList", JSON.stringfy( (JSON.parse(localStorage.getItem("storedList"))).push(document.getElementById("newEntry").value) ));
+		
+	}
+	function modifyEntry() { 
  		localStorage.setItem("sample_text", document.getElementById("fentry").value);
 	}
    </script>
