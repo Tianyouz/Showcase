@@ -46,13 +46,21 @@
  		<input type="button" onclick="return modifyEntry();" value="Modify" style="background-color: #633700; color: white; padding: 14px 16px; font-size: 17px">
    </form> 
 
+
+   <script src="mainJS.js">
+   </script>
    <script>
 	
-   </script>
-   <script src="mainJS.js">
+		
+		for (i = 0; i < parseInt(localStorage.totalLen); i++){
+			
+			var dir = document.createElement("a");
+			dir.href = "newEntryPage.html";
+			dir.innerHTML = (JSON.parse(localStorage.getItem("storedList")))[i];
+			document.body.appendChild(dir);
+		}
 	
    </script>
-
 
 
 </body>
